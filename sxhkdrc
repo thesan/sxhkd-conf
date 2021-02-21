@@ -1,0 +1,162 @@
+# ---- Create Modifiers (or Masks) ----
+button9
+  set -e; \
+  xdotool keydown super; \
+  date "+%s%3N" > ~/tmp/sxhkd.cache;
+
+any + @button9
+  set -e; \
+  while S="$(cat ~/tmp/sxhkd.cache)" && ! [[ -z "$S" || $(("$S")) -gt 0 && $(( $(date "+%s%3N") - "$S" )) -gt 500 ]]; do \
+    sleep .5; \
+  done; \
+  xdotool keyup super keyup shift
+  #xdotool sleep 1 keyup super
+
+button8
+  xdotool keydown super+alt
+
+any + @button8
+  xdotool sleep 1 keyup super+alt
+
+Menu
+  xdotool keydown super
+
+any + @Menu
+  xdotool keyup super
+
+# ---- Mouse shortcuts ----
+super + button9
+  xdotool sleep .2 key --clearmodifiers Super_R+space
+
+super + shift + button9
+  set -e; \
+  xdotool sleep .2 keyup super+shift key super+space; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + shift + button1
+  set -e; \
+  xdotool keyup shift sleep .2 click 1 key Up keyup super; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + @button2
+  xdotool click 1 key --clearmodifiers alt+c; \
+
+super + shift + @button2
+  set -e; \
+  xdotool click 1 key --clearmodifiers alt+c keyup shift keyup super; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + button3
+  set -e; \
+  echo "button3" > ~/tmp/sxhkd.cache; \
+  sleep 0.3; \
+  [ "$(cat ~/tmp/sxhkd.cache)" == "button3" ] && xdotool key Down;
+
+super + @button3
+  set -e; \
+  xdotool click 1 key --clearmodifier super+e; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + button4
+  set -e; \
+  xdotool key w; \
+  date "+%s%3N" > ~/tmp/sxhkd.cache;
+
+super + button5
+  set -e; \
+  xdotool key s; \
+  date "+%s%3N" > ~/tmp/sxhkd.cache;
+
+super + shift + button4
+  xdotool key --clearmodifier super+d
+
+super + shift + button5
+  xdotool key --clearmodifier super+d
+
+super + button6
+  set -e; \
+  xdotool key Down keydown shift; \
+  echo "selectmode" > ~/tmp/sxhkd.cache;
+  #xdotool key Down key a keyup super keydown super; \
+  #now=$(date "+%s%3N") ; \
+  #echo "$now" > ~/tmp/sxhkd.cache; \
+  #sleep .7; \
+  #[ "$(cat ~/tmp/sxhkd.cache)" == "$now" ] && xdotool key --clearmodifier super+Up;
+  #date "+%s%3N" > ~/tmp/sxhkd.cache;
+  #xdotool key --clearmodifiers alt+shift+Tab 
+
+super + button7
+  set -e; \
+  xdotool key Down keydown shift; \
+  echo "selectmode" > ~/tmp/sxhkd.cache;
+  #set -e; \
+  #xdotool key d keyup super keydown super key Up; \
+  #date "+%s%3N" > ~/tmp/sxhkd.cache;
+  #now=$(date "+%s%3N") ; \
+  #echo "$now" > ~/tmp/sxhkd.cache; \
+  #sleep .7; \
+  #[ "$(cat ~/tmp/sxhkd.cache)" == "$now" ] && xdotool key --clearmodifier super+Up;
+  #date "+%s%3N" > ~/tmp/sxhkd.cache;
+  #xdotool key --clearmodifiers alt+Tab 
+
+super + shift + button6
+  set -e; \
+  xdotool keyup super+shift key super+Up; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + shift + button7
+  set -e; \
+  xdotool keyup super+shift key super+Up; \
+  echo "" > ~/tmp/sxhkd.cache;
+
+super + alt + button4
+  xdotool key --clearmodifiers XF86AudioRaiseVolume
+
+super + alt + button5
+  xdotool key --clearmodifiers XF86AudioLowerVolume
+
+super + alt + button6
+  xbacklight -5
+
+super + alt + button7
+  xbacklight +5
+
+# ---- Keyboard shortcuts ----
+#alt + e
+#  xdotool key --clearmodifiers super+m
+
+# ---- Brightness control ----
+super + slash
+  xbacklight =1
+
+super + comma
+#  xdotool key --clearmodifiers XF86MonBrightnessDown
+  xbacklight -5
+
+super + period
+#  xdotool key --clearmodifiers XF86MonBrightnessUp
+  xbacklight +5
+
+super + shift + comma
+  xbacklight -1
+
+super + shift + period
+  xbacklight +1
+
+alt + comma
+#  xdotool key --clearmodifiers XF86MonBrightnessDown
+  xbacklight -5
+
+alt + period
+#  xdotool key --clearmodifiers XF86MonBrightnessUp
+  xbacklight +5
+
+alt + shift + comma
+  xbacklight -1
+
+alt + shift + period
+  xbacklight +1
+
+alt + slash
+  xbacklight =1
+
